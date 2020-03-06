@@ -148,11 +148,6 @@ func TestMain(m *testing.M) {
 		}
 	}
 
-	if *proxyAddr != "" {
-		StartProxy()
-		select {}
-	}
-
 	// Run with a temporary TMPDIR to check that the tests don't
 	// leave anything behind.
 	topTmpdir, err := ioutil.TempDir("", "cmd-go-test-")
@@ -2759,15 +2754,6 @@ func TestCgoCache(t *testing.T) {
 	tg.setenv("CGO_LDFLAGS", "-lnosuchlibraryexists")
 	tg.runFail("build", "-o", exe, "x")
 	tg.grepStderr(`nosuchlibraryexists`, "did not run linker with changed CGO_LDFLAGS")
-}
-
-// Issue 23982
-func TestFilepathUnderCwdFormat(t *testing.T) {
-	tg := testgo(t)
-	defer tg.cleanup()
-	tg.parallel()
-	tg.run("test", "-x", "-cover", "log")
-	tg.grepStderrNot(`\.log\.cover\.go`, "-x output should contain correctly formatted filepath under cwd")
 }
 
 // Issue 24396.
