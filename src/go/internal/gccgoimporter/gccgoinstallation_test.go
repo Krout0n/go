@@ -82,13 +82,6 @@ var importablePackages = [...]string{
 	"hash",
 	"html",
 	"html/template",
-	"image/color",
-	// "image/color/palette", // Added in GCC 4.9.
-	"image/draw",
-	"image/gif",
-	"image",
-	"image/jpeg",
-	"image/png",
 	"index/suffixarray",
 	"io",
 	"io/ioutil",
